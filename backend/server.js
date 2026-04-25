@@ -6,8 +6,9 @@ const app = express();
 const PORT = 3000;
 
 const usersRoute = require("./routes/users");
+const authRoute = require("./routes/auth");
 
-app.use("/users",usersRoute);
+
 
 const people = [
   {
@@ -29,6 +30,8 @@ const people = [
 
 app.use(cors());
 app.use(express.json())
+app.use("/users",usersRoute);
+app.use("/auth",authRoute)
 
 app.get("/api", (req, res) => {
     console.log(req.query)
