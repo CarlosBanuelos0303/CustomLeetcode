@@ -1,4 +1,7 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const JWT_SECRET = "secret_key";
 
 const users = [];
 
@@ -37,7 +40,17 @@ const login = async (req, res) => {
         return res.status(400).json({ message: "Password incorrecto" });
     }
 
-    res.json({ message: "Login exitoso" });
+    const token = jwt.sign(
+        { email: user.email },
+        JWT_SECRET,
+        { expiresIn: "1h" }
+    );
+
+    res.json({
+        message: "Login exitoso",
+        token
+    });
+
 };;
 
 

@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { getUsers, createUser } = require("../controllers/userController");
-console.log(getUsers)
-console.log(2);
+const authMiddleware = require("../middleware/authMiddleware");
 
 router.get("/", getUsers);
 

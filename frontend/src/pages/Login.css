@@ -1,0 +1,21 @@
+
+.texto-pantone {
+    color: #FFC72C;
+    font-family:  'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .texto-montserrat {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600; /* SemiBold */
+    font-size: 18px;
+  }
+s
+
+   /*fondo amarillo*/
+   .fondo-pantone-amarillo {
+    background-color:#FFC72C;
+
+  }
+

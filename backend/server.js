@@ -8,26 +8,6 @@ const PORT = 3000;
 const usersRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 
-
-
-const people = [
-  {
-    name: "Lena",
-    job: "Architect",
-    isRich: true
-  },
-  {
-    name: "Marcus",
-    job: "Barista",
-    isRich: false
-  },
-  {
-    name: "Ava",
-    job: "Software Engineer",
-    isRich: true
-  }
-]
-
 app.use(cors());
 app.use(express.json())
 app.use("/users",usersRoute);

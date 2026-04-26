@@ -1,0 +1,128 @@
+
+.texto-pantone {
+    color: #FFC72C;
+    font-family:  'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .texto-montserrat {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600; 
+    font-size: 18px;
+  }
+
+   .fondo-pantone-amarillo {
+    background-color:#FFC72C;
+
+ 
+  }
+
+  html, body {
+    height: 100%;  
+    margin: 0;     
+  }
+  
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;    
+    background-color: #ede7e7;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    flex: 1;         
+    padding-bottom: 50px; 
+  }
+
+
+  .footer {
+    background-color: hsl(161, 50%, 44%); 
+    padding: 20px 0;           
+    color: white;             
+    position: relative;        
+    text-align: center;        
+  }
+  
+  .fondoverde
+  {
+    color: hsl(161, 50%, 44%); /* Fondo verde */
+
+  }
+  .footer-text {
+    margin: 5px 0;             /* Espaciado entre las líneas de texto */
+    font-family: 'Montserrat', sans-serif; /* Tipo de letra */
+    font-size: 16px;           /* Tamaño de la fuente */
+  }
+
+  .title1 {
+    color: #58374c;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600; /* SemiBold */
+    font-size: 30px;
+    text-align: center; /* Centra el texto */
+  }
+
+  .title1white {
+    color:  #ede7e7;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600; /* SemiBold */
+    font-size: 30px;
+    text-align: center; /* Centra el texto */
+  }
+
+
+  .fondoguinda{
+    background-color: #58374c;
+    
+
+  }
+
+  .textguinda{
+
+    color:  #58374c;
+  }
+
+  .text1 {
+    color:  #ede7e7;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600; /* SemiBold */
+    font-size: 20px;
+    text-align: center; /* Centra el texto */
+  }
+
+  .fondo{
+    background-color: #ede7e7;
+    min-height: 100vh;
+  }
+
+  .fondonav{
+    background-color: #58374c;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+  
+  }
+
+  .fondo-pantone-black {
+    background-color: #292421 ;
+    min-height: 100vh;
+  }
+
+  .custom-border {
+    border: 0.1px solid #ccc !important; /* Ajusta el grosor y color */
+}
+
+.custom-cream {
+  background-color: #cacaca !important; /* Tono crema */
+  color: black !important;
+}
+
+.footer-alto {
+  background-color: #19B78E;
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
