@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import "./Login.css";
 
 const HOST = "http://localhost:3000"
 
@@ -74,7 +75,6 @@ const handleLogin = async (e) => {
             <button className="btn btn-success w-100 mb-2">
               <i className="bi bi-person-fill-check"></i> Entrar
             </button>
-
             <button 
               type="button"
               className="btn btn-outline-primary w-100 mb-3"

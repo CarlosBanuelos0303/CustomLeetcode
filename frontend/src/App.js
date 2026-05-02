@@ -3,6 +3,8 @@ import { useState } from "react";
 import Login from "./pages/Login"
 import Home from "./pages/Home";
 import Register from "./pages/Register";
+import ProblemDetail from "./pages/ProblemDetail";
+
 
 import logo from './logo.svg';
 import './App.css';
@@ -23,20 +25,34 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/login"
-          element={<Login setToken={setToken} />}
-        />
+      <Route
+        path="/login"
+        element={<Login setToken={setToken} />}
+      />
 
-        <Route
-          path="/"
-          element={
-            token ? <Home /> : <Navigate to="/login" />
-          }
-        />
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
 
-        <Route path="/register" element={<Register />} />
-      </Routes>
+      <Route
+        path="/register"
+        element={<Register />}
+      />
+
+      <Route
+        path="/problems/:id"
+        element={
+          <ProtectedRoute>
+            <ProblemDetail />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
     </BrowserRouter>
   );
 }

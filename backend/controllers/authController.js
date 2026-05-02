@@ -1,34 +1,51 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const pool = require("../db");
 
 const JWT_SECRET = "secret_key";
 
-const users = [];
 
 const register = async (req, res) => {
-    const {email, password} = req.body;
+  const { email, password } = req.body;
 
-    if (!email || !password) {
-        return res.status(400).json({message: "Faltaron datos"});
+  if (!email || !password) {
+    return res.status(400).json({ message: "Faltaron datos" });
+  }
+
+  try {
+    const existingUser = await pool.query(
+      "SELECT * FROM users WHERE email = $1",
+      [email]
+    );
+
+    if (existingUser.rows.length > 0) {
+      return res.status(400).json({ message: "Usuario ya existe" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = {
-        email,
-        password: hashedPassword
-    };
+    await pool.query(
+      "INSERT INTO users (email, password) VALUES ($1, $2)",
+      [email, hashedPassword]
+    );
 
-    users.push(user);
+    res.json({ message: "Usuario registrado" });
 
-    res.json({ message: "Usuario registrado"});
-
-}
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error en servidor" });
+  }
+};
 
 const login = async (req, res) => {
     const { email, password } = req.body;
 
-    const user = users.find(u => u.email === email);
+    const result = await pool.query(
+    "SELECT * FROM users WHERE email = $1",
+    [email]
+    );
+
+    const user = result.rows[0];
 
     if (!user) {
         return res.status(400).json({ message: "Usuario no existe" });
