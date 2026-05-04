@@ -14,7 +14,6 @@ const ProblemDetail = () => {
 
   const [code, setCode] = useState("");
 
-  // 🔥 Fetch problema
   useEffect(() => {
     const fetchProblem = async () => {
       try {
@@ -38,7 +37,7 @@ const ProblemDetail = () => {
     fetchProblem();
   }, [id]);
 
-  // 🔥 Fetch submissions
+
   useEffect(() => {
     const fetchSubmissions = async () => {
       try {
@@ -62,7 +61,7 @@ const ProblemDetail = () => {
     fetchSubmissions();
   }, [id]);
 
-  // 🔥 Enviar submission
+
   const handleSubmit = async () => {
     if (!code.trim()) return;
 
@@ -81,7 +80,6 @@ const ProblemDetail = () => {
         })
       });
 
-      // 🔥 refrescar submissions
       setLoadingSubmissions(true);
 
       const response = await fetch(`${HOST}/submissions/${id}`, {
@@ -122,7 +120,6 @@ const ProblemDetail = () => {
   return (
     <div className="container mt-4">
 
-      {/* Header */}
       <div className="card p-4 mb-3">
         <h2>{problem.title}</h2>
 
@@ -139,12 +136,12 @@ const ProblemDetail = () => {
         </span>
       </div>
 
-      {/* Descripción */}
+
       <div className="card p-4 mb-3">
         <p>{problem.description}</p>
       </div>
 
-      {/* Editor */}
+
       <div className="card p-4 mb-3">
         <h5>Tu solución</h5>
 
