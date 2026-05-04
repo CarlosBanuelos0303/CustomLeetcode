@@ -1,0 +1,17 @@
+$kind: http-request
+name: localhost:3000/auth/login
+url: localhost:3000/auth/login
+method: POST
+headers:
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jb20iLCJpYXQiOjE3Nzc5MjgzNTMsImV4cCI6MTc3NzkzMTk1M30.piRxtm3k8Dux47ZTyDmZR_FtDKbR9Xb0GRVeESd3Mu4
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \  \"email\": \"a@b.com\",\r
+
+    \  \"password\": \"123\"\r
+
+    }"
+order: 1777928387011

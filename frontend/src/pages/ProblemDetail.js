@@ -4,15 +4,28 @@ import { useParams } from "react-router-dom";
 const HOST = "http://localhost:3000";
 
 const ProblemDetail = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
 
   const [problem, setProblem] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const [submissions, setSubmissions] = useState([]);
+  const [loadingSubmissions, setLoadingSubmissions] = useState(true);
+
+  const [code, setCode] = useState("");
+
+  // 🔥 Fetch problema
   useEffect(() => {
     const fetchProblem = async () => {
       try {
-        const response = await fetch(`${HOST}/problems/${id}`);
+        const token = localStorage.getItem("token");
+
+        const response = await fetch(`${HOST}/problems/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
         const data = await response.json();
         setProblem(data);
         setLoading(false);
@@ -25,7 +38,69 @@ const ProblemDetail = () => {
     fetchProblem();
   }, [id]);
 
-  console.log("a");
+  // 🔥 Fetch submissions
+  useEffect(() => {
+    const fetchSubmissions = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const response = await fetch(`${HOST}/submissions/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const data = await response.json();
+        setSubmissions(data);
+        setLoadingSubmissions(false);
+      } catch (err) {
+        console.error(err);
+        setLoadingSubmissions(false);
+      }
+    };
+
+    fetchSubmissions();
+  }, [id]);
+
+  // 🔥 Enviar submission
+  const handleSubmit = async () => {
+    if (!code.trim()) return;
+
+    try {
+      const token = localStorage.getItem("token");
+
+      await fetch(`${HOST}/submissions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          problem_id: id,
+          code
+        })
+      });
+
+      // 🔥 refrescar submissions
+      setLoadingSubmissions(true);
+
+      const response = await fetch(`${HOST}/submissions/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const data = await response.json();
+      setSubmissions(data);
+      setLoadingSubmissions(false);
+
+      setCode(""); 
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   if (loading) {
     return (
       <div className="text-center mt-5">
@@ -69,15 +144,43 @@ const ProblemDetail = () => {
         <p>{problem.description}</p>
       </div>
 
-      {/* Editor (placeholder) */}
-      <div className="card p-4">
+      {/* Editor */}
+      <div className="card p-4 mb-3">
         <h5>Tu solución</h5>
 
         <textarea
           className="form-control"
           rows="10"
           placeholder="Escribe tu código aquí..."
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
         />
+
+        <button
+          className="btn btn-success mt-3"
+          onClick={handleSubmit}
+        >
+          Enviar solución
+        </button>
+      </div>
+
+      <div className="card p-4">
+        <h3>Tus envíos</h3>
+
+        {loadingSubmissions ? (
+          <p>Cargando...</p>
+        ) : submissions.length === 0 ? (
+          <p>No hay submissions aún</p>
+        ) : (
+          <ul className="list-group">
+            {submissions.map((sub) => (
+              <li key={sub.id} className="list-group-item">
+                <strong>{sub.status}</strong> —{" "}
+                {new Date(sub.created_at).toLocaleString()}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
     </div>
